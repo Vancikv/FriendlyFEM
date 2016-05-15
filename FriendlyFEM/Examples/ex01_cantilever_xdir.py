@@ -14,7 +14,7 @@ elements = []
 for i in range(nelem + 1):
     nodes.append(Node(x=i * length / float(nelem), y=0., F_ext=[0., 0., 0.], supports=[0, 0, 0], nnodedofs=3))
     if i < nelem:
-        elements.append(ElemBeamLin(nodes=[i + 1, i + 2], A=.16, Iy=.0021, Ik=.0021, k=1., E=20000., nu=0.2, density=0.0))
+        elements.append(ElemBeamGrid(nodes=[i + 1, i + 2], A=0.16, Iy=.0021, Ik=.0021, k=1., E=20000., nu=0.2, density=0.0))
 nodes[0].supports = [1, 1, 1]
 nodes[-1].F_ext = load
 

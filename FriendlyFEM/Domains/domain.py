@@ -66,7 +66,7 @@ class Domain(object):
 
         K_glob = np.zeros((code_count, code_count))  # Global stiffness
         for el in els:
-            el.set_matrices()
+            el.calculate_stiffness()
             el.set_codes()
             cds = [(i, el.v_code[i]) for i in range(len(el.v_code)) if el.v_code[i] != 0]
             K_loc = el.K

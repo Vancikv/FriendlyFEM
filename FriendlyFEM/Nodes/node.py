@@ -4,16 +4,11 @@ Created on May 12, 2016
 @author: Werner
 '''
 import numpy as np
-node_compulsory = ['x','y','nnodedofs','F_ext','supports']
+from FriendlyFEM.Auxiliary import CommonInit
 
-class Node(object):
-    def __init__(self, *args, **kwargs):
-        for key in node_compulsory:
-            try:
-                setattr(self,key,kwargs[key])
-            except KeyError:
-                print 'Error: The property %s for a node element has not been specified.' % key
-                raise
+class Node(CommonInit):
+    def __init__(self, **kwargs):
+        super(Node,self).__init__(**kwargs)
         self.free_dofs = [i for i, j in enumerate(self.supports) if j == 0]
         self.v_disp = np.zeros(self.nnodedofs)
         

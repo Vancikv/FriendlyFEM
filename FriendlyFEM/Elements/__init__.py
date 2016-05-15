@@ -1,1 +1,1 @@
-from element_beam_linear import ElemBeamLin
+from FriendlyFEM.Elements.element_beam_grid import ElemBeamGrid

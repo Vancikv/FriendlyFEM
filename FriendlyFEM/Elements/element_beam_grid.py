@@ -3,24 +3,13 @@ Created on May 12, 2016
 
 @author: Werner
 '''
+
 import numpy as np
 from element import Element
-from init_args import beam_lin_optional, beam_lin_compulsory
 
-class ElemBeamLin(Element):
-    def __init__(self, *args, **kwargs):
-        for key in beam_lin_compulsory:
-            try:
-                setattr(self,key,kwargs[key])
-            except KeyError:
-                print 'Error: The property %s for a beam element has not been specified.' % key
-                raise
-        for key in beam_lin_optional:
-            try:
-                setattr(self,key,kwargs[key])
-            except KeyError:
-                pass
-            
+class ElemBeamGrid(Element):
+    stiffdef = 'linear'
+    stifftype_dict = {'linear':'stiffcalc_linear'}
     def plot(self, ax, magnitude, id=0):
         dom = self.domain()
         nds = self.nodes + [self.nodes[0]]
@@ -33,7 +22,7 @@ class ElemBeamLin(Element):
         # Plot deformed shape
         ax.plot(xy[0, :], xy[1, :],  w, color = 'red', linewidth=5.) #linestyle='-', color='black', linewidth=1.
             
-    def set_matrices(self):
+    def stiffcalc_linear(self):
         '''
         Approximating the deflection and two rotations (bending, torsion) with linear functions
         '''
