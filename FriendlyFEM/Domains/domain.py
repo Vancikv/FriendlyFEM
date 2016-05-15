@@ -9,9 +9,9 @@ import weakref
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import itertools as it
-domain_optional = ['elements', 'nodes']
+from FriendlyFEM.Auxiliary import CommonInit
 
-class Domain(object):
+class Domain(CommonInit):
     @property
     def elements(self):
         return self._elements
@@ -20,14 +20,7 @@ class Domain(object):
         self._elements = value
         for e in self._elements:
             e.domain = weakref.ref(self)
-        
     nodes = []
-    def __init__(self, *args, **kwargs):
-        for key in domain_optional:
-            try:
-                setattr(self,key,kwargs[key])
-            except KeyError:
-                pass
 
     def plot(self, id=None,magnitude=10.):
         fig = plt.figure()
@@ -71,7 +64,11 @@ class Domain(object):
             cds = [(i, el.v_code[i]) for i in range(len(el.v_code)) if el.v_code[i] != 0]
             K_loc = el.K
             for ii, ij in it.product(cds, cds):
-                K_glob[ii[1] - 1, ij[1] - 1] += K_loc[ii[0], ij[0]]
+                try:
+                    K_glob[ii[1] - 1, ij[1] - 1] += K_loc[ii[0], ij[0]]
+                except:
+                    print ii, ij
+                    print el.__class__.__name__
         self.K_glob = K_glob    
             
         f_glob = np.zeros(code_count)  # Global load vector

@@ -21,6 +21,8 @@ cmp_Element = ['E', 'nu', 'density']
 ### Level 2
 opt_ElemBeamGrid = opt_Element + []
 cmp_ElemBeamGrid = cmp_Element + ['A', 'Ik', 'Iy', 'k']
+opt_ElemSoilQuadrangleLin = opt_Element + []
+cmp_ElemSoilQuadrangleLin = cmp_Element + ['c1','c2']
 ###
 
 # /Elements
@@ -33,3 +35,11 @@ cmp_Node = ['x','y','nnodedofs','F_ext','supports']
 ##
 
 # /Nodes
+
+# Domain
+
+## Level 1:
+opt_Domain = ['elements', 'nodes']
+cmp_Domain = []
+
+# /Domain

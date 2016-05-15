@@ -1,1 +1,2 @@
-from FriendlyFEM.Elements.element_beam_grid import ElemBeamGrid
+from element_beam_grid import ElemBeamGrid
+from element_soil_quadrangle_linear import ElemSoilQuadrangleLin
