@@ -22,4 +22,4 @@ dom = Domain(nodes=nodes,elements=elements,c1=1.,c2=1.)
 dom.solve(verbose = True)
 dom.plot(magnitude=1.)
 
-"""test
+"""testjjjjjj
