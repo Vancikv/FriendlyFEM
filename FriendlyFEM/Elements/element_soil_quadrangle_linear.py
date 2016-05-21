@@ -24,8 +24,8 @@ def get_triangle_stiffness_matrix(c1,c2, x, y):
     
 class ElemSoilQuadrangleLin(Element):
     stiffdef = '2triangles'
-    stifftype_dict = {'2triangles':'set_K_2_triangles', '4triangles':'set_K_4_triangles',
-                                   'isoparametric':'set_K_isoparametric'}
+    stifftype_dict = {'2triangles':'stiffcalc_2_triangles', '4triangles':'stiffcalc_4_triangles',
+                                   'isoparametric':'stiffcalc_isoparametric'}
 
     def set_codes(self):
         '''
@@ -33,7 +33,7 @@ class ElemSoilQuadrangleLin(Element):
         '''
         self.v_code = [self.domain().nodes[i-1].v_code[0] for i in self.nodes]
 
-    def set_K_2_triangles(self):
+    def stiffcalc_2_triangles(self):
         nds = self.nodes + [self.nodes[0]]
         x = np.array([self.domain().nodes[i - 1].x for i in nds])
         y = np.array([self.domain().nodes[i - 1].y for i in nds])
@@ -53,7 +53,7 @@ class ElemSoilQuadrangleLin(Element):
         self.K = K
         self.A = sum(A_lst)
 
-    def set_K_4_triangles(self):
+    def stiffcalc_4_triangles(self):
 
         nds = self.nodes
         x = np.array([self.domain().nodes[i - 1].x for i in nds])
@@ -81,7 +81,7 @@ class ElemSoilQuadrangleLin(Element):
         self.K = K[:4, :4]
         self.A = sum(A_lst)
 
-    def set_K_isoparametric(self):
+    def stiffcalc_isoparametric(self):
         pass
 
     def plot(self, ax, magnitude, id=0):

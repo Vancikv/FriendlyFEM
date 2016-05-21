@@ -23,6 +23,8 @@ opt_ElemBeamGrid = opt_Element + []
 cmp_ElemBeamGrid = cmp_Element + ['A', 'Ik', 'Iy', 'k']
 opt_ElemSoilQuadrangleLin = opt_Element + []
 cmp_ElemSoilQuadrangleLin = cmp_Element + ['c1','c2']
+opt_ElemPlateTriangleLin = opt_Element + ['load']
+cmp_ElemPlateTriangleLin = cmp_Element + ['thickness']
 ###
 
 # /Elements

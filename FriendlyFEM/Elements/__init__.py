@@ -1,2 +1,3 @@
 from element_beam_grid import ElemBeamGrid
 from element_soil_quadrangle_linear import ElemSoilQuadrangleLin
+from element_plate_triangle_linear import ElemPlateTriangleLin

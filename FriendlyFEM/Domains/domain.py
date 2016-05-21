@@ -66,11 +66,12 @@ class Domain(CommonInit):
             for ii, ij in it.product(cds, cds):
                 try:
                     K_glob[ii[1] - 1, ij[1] - 1] += K_loc[ii[0], ij[0]]
-                except:
+                except IndexError:
+                    print 'Index out of bounds in stiffness matrix assembly.'
                     print ii, ij
                     print el.__class__.__name__
         self.K_glob = K_glob    
-            
+
         f_glob = np.zeros(code_count)  # Global load vector
         for nd in nds:
             for i, c in enumerate(nd.v_code):
@@ -80,7 +81,7 @@ class Domain(CommonInit):
             for i, c in enumerate(el.v_code):
                 if c != 0: f_glob[c - 1] += p[i]
         self.f_glob = f_glob
-                
+
     def solve(self, verbose=False):
         self.global_assembly()
         K_glob = self.K_glob
